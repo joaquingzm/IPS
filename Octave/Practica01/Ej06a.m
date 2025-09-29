@@ -3,7 +3,7 @@
 % todas las figuras.
 clear all;close all;clc;
 % Anadimos directorio con definiciones de funciones utiles
-addpath('ResolucionTP1TP2/funciones')
+addpath('Funciones')
 % Creamos un vector de tiempo util para todo el ejercicio.
 dt = 1e-3;
 t  = -20:dt:20;
@@ -80,7 +80,7 @@ plotCompleto(t,xd,...
     'LineStyle','r.-',...
     'LineWidth',2);
 
-legend('h(t)','2h(-1/2(t+10))','location','northwest');
+legend('h(t)','h(t/2).[u(t+2)-u(t-2)]','location','northwest');
 
 %% e)
 xe = tri1(t.^2);

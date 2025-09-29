@@ -1,5 +1,5 @@
-function plotCompleto(t, x, varargin)
-    % plotCompleto(t, x, 'ParameterName', ParameterValue, ...)
+function stemCompleto(n, x, varargin)
+    % stemCompleto(n, x, 'ParameterName', ParameterValue, ...)
     %
     % Parámetros opcionales (nombre-valor):
     %   - 'Subplot' (vector/celda): Configuración de subplot
@@ -12,22 +12,28 @@ function plotCompleto(t, x, varargin)
     %   - 'YLabel' (string): Etiqueta eje Y (default: '')
     %   - 'Title' (string): Título del gráfico (default: '')
     %   - 'FontSize' (number): Tamaño de fuente (default: 12)
-    %   - 'LineStyle' (string): Estilo/color de línea (default: 'b-')
+    %   - 'Color' (string): Color de la línea y marcadores (default: 'b')
+    %   - 'LineStyle' (string): Estilo de línea (default: '-')
     %   - 'LineWidth' (number): Grosor de línea (default: 1)
+    %   - 'MarkerFaceColor' (string) : Color del interior de marcadores
+    %   - 'MarkerEdgeColor' (string) : Color del borde de marcadores
+    %   - 'Marker' (string): Estilo de marcador (default: 'o')
+    %   - 'MarkerSize' (number): Tamaño de marcador (default: 6)
+    %   - 'Filled' (true/false): Rellenar los marcadores (default: false)
+    %   - 'SupTitle' (string):
     %
     % Ejemplos:
-    %    t = 0:0.1:10;
-    %    x1 = sin(t);
-    %    x2 = cos(t);
+    %    n = 0:20;
+    %    x = sin(0.2*pi*n);
     %
-    %    % Subplot tradicional
-    %    plotCompleto(t, x1, 'Subplot', [2,1,1], 'Title', 'Seno');
-    %    plotCompleto(t, x2, 'Subplot', [2,1,2], 'Title', 'Coseno');
+    %    % Stem básico con marcadores rellenos
+    %    stemCompleto(n, x, 'Filled', true);
     %
-    %    % Subplot con múltiples índices (usando celda)
-    %    plotCompleto(t, x1, 'Subplot', {2,2,[1,2]}, 'Title', 'Seno en subplot combinado');
-    %    plotCompleto(t, x2, 'Subplot', {2,2,3}, 'Title', 'Coseno');
-    %    plotCompleto(t, x1+x2, 'Subplot', {2,2,4}, 'Title', 'Suma');
+    %    % Stem con múltiples parámetros
+    %    stemCompleto(n, x, 'Maximize', true, 'AxisLimits', [0 20 -1.2 1.2], ...
+    %                 'XLabel', 'n', 'YLabel', 'x[n]', 'Title', 'Señal discreta', ...
+    %                 'FontSize', 16, 'Color', 'r', 'LineStyle', '-', ...
+    %                 'LineWidth', 2, 'Marker', 's', 'MarkerSize', 8, 'Filled', true);
 
     % Valores por defecto
     defaultParams = struct(...
@@ -39,8 +45,14 @@ function plotCompleto(t, x, varargin)
         'YLabel', '', ...
         'Title', '', ...
         'FontSize', 12, ...
-        'LineStyle', '', ...
-        'LineWidth', 1);
+        'Color', 'b', ...
+        'LineStyle', '-', ...
+        'LineWidth', 1, ...
+        'MarkerFaceColor', 'none', ...
+        'MarkerEdgeColor', 'auto', ...
+        'Marker', 'o', ...
+        'MarkerSize', 6, ...
+        'Filled', true);
 
     % Parsear parámetros
     params = parseParams(defaultParams, varargin);
@@ -54,7 +66,7 @@ function plotCompleto(t, x, varargin)
                 error('El parámetro Subplot en formato celda debe tener 3 elementos: {filas, columnas, índices}');
             end
             m = params.Subplot{1};
-            n = params.Subplot{2};
+            n_sub = params.Subplot{2};
             p = params.Subplot{3};
         else
             % Formato de vector: [filas, columnas, índice] o [filas, columnas, índice1, índice2, ...]
@@ -62,7 +74,7 @@ function plotCompleto(t, x, varargin)
                 error('El parámetro Subplot debe tener al menos 3 elementos');
             end
             m = params.Subplot(1);
-            n = params.Subplot(2);
+            n_sub = params.Subplot(2);
             p = params.Subplot(3:end);
         end
 
@@ -76,7 +88,7 @@ function plotCompleto(t, x, varargin)
         end
 
         % Seleccionar subplot (maneja tanto índices escalares como vectores)
-        subplot(m, n, p);
+        subplot(m, n_sub, p);
     else
         % Crear figura o mantener actual (solo si no hay subplot)
         if ~params.Hold
@@ -90,8 +102,21 @@ function plotCompleto(t, x, varargin)
         end
     end
 
-    % Graficar
-    plot(t, x, params.LineStyle, 'Linewidth', params.LineWidth);
+    % Preparar propiedades para stem
+    stemProperties = {'Color', params.Color, ...
+                     'LineStyle', params.LineStyle, ...
+                     'LineWidth', params.LineWidth, ...
+                     'Marker', params.Marker, ...
+                     'MarkerFaceColor', params.MarkerFaceColor,...
+                     'MarkerEdgeColor', params.MarkerEdgeColor,...
+                     'MarkerSize', params.MarkerSize};
+
+    % Graficar con stem
+    if params.Filled
+        h = stem(n, x, 'filled', stemProperties{:});
+    else
+        h = stem(n, x, stemProperties{:});
+    end
 
     % Configurar ejes
     if ~isempty(params.AxisLimits)
@@ -132,9 +157,8 @@ function plotCompleto(t, x, varargin)
         end
     end
 
-
-
     % ------------------------------------------------------------
+
 
     % Restaurar estado hold si es necesario
     if params.Hold
@@ -154,27 +178,30 @@ function params = parseParams(defaultParams, varargin)
     addParameter(p, 'YLabel', defaultParams.YLabel);
     addParameter(p, 'Title', defaultParams.Title);
     addParameter(p, 'FontSize', defaultParams.FontSize);
+    addParameter(p, 'Color', defaultParams.Color);
     addParameter(p, 'LineStyle', defaultParams.LineStyle);
     addParameter(p, 'LineWidth', defaultParams.LineWidth);
+    addParameter(p, 'MarkerFaceColor', defaultParams.MarkerFaceColor);
+    addParameter(p, 'MarkerEdgeColor', defaultParams.MarkerEdgeColor);
+    addParameter(p, 'Marker', defaultParams.Marker);
+    addParameter(p, 'MarkerSize', defaultParams.MarkerSize);
+    addParameter(p, 'Filled', defaultParams.Filled);
 
     parse(p, varargin{1}{:});
     params = p.Results;
 end
 
-
-% function plotCompleto(maximizar,lim_ejes,eje_x,eje_y,titulo,tam_letra,col,grosor,t,x)
+% function stemCompleto(lim_ejes,eje_x,eje_y,titulo,tam_letra,col,filled,t,x)
 %
-%     % plotCompleto(lim_ejes,eje_x,titulo,tam_letra,col,grosor,t,x)
+%     % StemCompleto(lim_ejes,eje_x,titulo,tam_letra,col,filled,t,x)
 %     %
 %     % Ej:
 %     %    t = -40:0.01:40;
 %     %    xa = -2*sin(-0.2*t + 5/3*pi);
-%     %    plotCompleto([t(1) t(end) -2 2],'t','f(t)','Function \ f(t)',20,'r.-',2,t,xa)
+%     %    stemCompleto([t(1) t(end) -2 2],'t','f(t)','Function \ f(t)',20,'r.-',2,t,xa)
 %
-%     if maximizar
-%         figure('units','normalized','outerposition',[0 0 1 1]) % Creo y maximizo figura.
-%     end
-%     plot(t,x,col,'Linewidth',grosor); % Grafico. Color (y marcador) y grosor.
+% %     figure('units','normalized','outerposition',[0 0 1 1]) % Creo y maximizo figura.
+%     stem(t,x,col,filled,'LineWidth',5,'MarkerSize',10); % Grafico. Color (y marcador) y grosor.
 %     axis(lim_ejes);grid on; % Coloco los limites de los ejes. Grilla.
 %     set(gca, 'FontSize', tam_letra); % Tamaño de letra para la leyenda y ejes.
 %     xlabel(eje_x,'Interpreter','Latex'); % Nombro el eje x.

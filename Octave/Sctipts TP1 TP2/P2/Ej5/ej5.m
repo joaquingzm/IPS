@@ -2,21 +2,21 @@
 % Limpiamos la ventana de comandos, borramos todas las variables, cerramos
 % todas las figuras.
 clear all;close all;clc;
-% Añadimos directorio con definiciones de funciones útiles
-addpath('../../funciones')
+% Aï¿½adimos directorio con definiciones de funciones ï¿½tiles
+addpath('Sctipts TP1 TP2/funciones')
 
 %% a)
 % S1
 % y[n] = x[n] + a*x[n-1]
-N = 50; a = 3;
+N = 50; a = 1/2;
 n = -5:N;
-x = 1.*(n>=0);
+x = 5.*(n==0);
 % x = 0.5*cos(2*pi*1/5*n);
 % x = (-1).^n;
 % x = 1.*(n==0);
 y = zeros(1,length(n));
 
-% Implementación de S1
+% Implementaciï¿½n de S1
 for ii = 1:length(n)
     if ii == 1
         y(ii) = x(ii); % ya que suponemos que x(ii-1) = 0 !
@@ -28,7 +28,7 @@ end
 stemCompleto(n,x,...
     'Maximize',1,...
     'Subplot',[2 1 1],...
-    'AxisLimits',[-3 N -2 2],...
+    'AxisLimits',[-3 N -10 10],...
     'XLabel','$n$',...
     'YLabel','$x[n]$',...
     'Title','Entrada de $S_1$',...
@@ -39,7 +39,7 @@ stemCompleto(n,x,...
 stemCompleto(n,y,...
     'Hold',1,...
     'Subplot',[2 1 2],...
-    'AxisLimits',[-3 N -2 10],...
+    'AxisLimits',[-3 N -5 20],...
     'XLabel','$n$',...
     'YLabel','$y[n]$',...
     'Title',['Salida de $S_3 \rightarrow y[n] = x[n] + ax[n-1]\ ,\  a = $' num2str(a)],...
@@ -47,7 +47,7 @@ stemCompleto(n,y,...
     'Color','m',...
     'LineWidth',2);
 
-%% 
+%%
 % S2
 % y[n] = x[n] * a*x[n-1]
 N = 50; a = 1.5;
@@ -57,7 +57,7 @@ x = 0.5*cos(2*pi*1/8*n);
 % x = (-1).^n;
 y = zeros(1,length(n));
 
-% Implementación de S2
+% Implementaciï¿½n de S2
 for ii = 1:length(n)
     if ii == 1
         y(ii) = x(ii); % ya que suponemos que x(ii-1) = 0 !
@@ -88,7 +88,7 @@ stemCompleto(n,y,...
     'Color','m',...
     'LineWidth',2);
 
-%% 
+%%
 % S3
 % y[n] = x[n] + b*y[n-1]
 N = 50; b = 0.5;
@@ -98,7 +98,7 @@ x = 1.*(n>=0);
 % x = (-1).^n;
 y = zeros(1,length(n));
 
-% Implementación de S3
+% Implementaciï¿½n de S3
 for ii = 1:length(n)
     if ii == 1
         y(ii) = x(ii); % ya que suponemos que x(ii-1) = 0 !
@@ -129,7 +129,7 @@ stemCompleto(n,y,...
     'Color','m',...
     'LineWidth',2);
 
-%% 
+%%
 % S4
 % y[n] = sum_{k = n-n0}^{n+n0} x[k]
 N = 30; n0 = 5;
@@ -139,7 +139,7 @@ x = 1.*(n>=0);
 % x = (-1).^n;
 y = zeros(1,length(n));
 for ii = 1:length(n)
-    
+
     if ii < n0
         y(ii) = cumsum(x(ii)) + sum(x(ii:ii+n0));
     else
@@ -149,7 +149,7 @@ for ii = 1:length(n)
             y(ii) = 0; % la salida es nula si no alcanzan las muestras para la ventana.
         end
     end
-    
+
 end
 
 stemCompleto(n,x,...
@@ -174,7 +174,7 @@ stemCompleto(n,y,...
     'Color','m',...
     'LineWidth',2);
 
-%% 
+%%
 % S5
 % y[n] = n*x[n]
 N = 30;
@@ -218,20 +218,20 @@ n = -5:N-1;
 x = -1.*(n == 0) +  1.*(n == 1) - 1.*(n==2);
 
 for ii = 1:length(n)
-    
+
     if ii <= K
         % hasta que la ventana "se llene"
-        y(ii) = median(x(ii:ii+K)); 
+        y(ii) = median(x(ii:ii+K));
     else
         if (ii+K) <= length(n)
-            % si la ventana abarca puntos de la señal
+            % si la ventana abarca puntos de la seï¿½al
             y(ii) = median(x(ii-K:ii+K));
         else
             % si la ventana tiene cada vez menos puntos
             y(ii) = median(x(ii-K:end));
         end
     end
-    
+
 end
 
 stemCompleto(n,x,...
