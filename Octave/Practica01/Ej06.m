@@ -3,7 +3,7 @@
 % todas las figuras.
 clear all;close all;clc;
 % Anadimos directorio con definiciones de funciones utiles
-addpath('ResolucionTP1TP2/funciones')
+addpath('Funciones')
 % Creamos un vector de tiempo util para todo el ejercicio.
 dt = 1e-3;
 t  = -20:dt:20;
