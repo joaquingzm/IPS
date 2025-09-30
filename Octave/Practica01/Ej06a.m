@@ -80,7 +80,7 @@ plotCompleto(t,xd,...
     'LineStyle','r.-',...
     'LineWidth',2);
 
-legend('h(t)','2h(-1/2(t+10))','location','northwest');
+legend('h(t)','h(t/2).[u(t+2)-u(t-2)]','location','northwest');
 
 %% e)
 xe = tri1(t.^2);
