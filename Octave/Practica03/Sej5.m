@@ -17,7 +17,7 @@ function y = Sej5(x,N,n)
 
     % Caso i+N>n(length(n)) se toma x(i+N>n(length(n))=0
     % El límite superior de la ventana toma valores de x que no existen
-    if i+N>length(n)
+    if (i+N)>length(n)
       y(i) = sum([x(i-N:length(n))]);
     endif
   endfor
