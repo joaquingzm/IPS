@@ -1,15 +1,14 @@
 %% Ej 6 P1 - IPS
-% Limpiamos la ventana de comandos, borramos todas las variables, cerramos
-% todas las figuras.
+% Limpiar
 clear all;close all;clc;
+
 % Anadimos directorio con definiciones de funciones utiles
-addpath('Funciones')
+addpath('Funciones');
+
 % Creamos un vector util para todo el ejercicio.
 n = -5:5;
 
 x = escalon(n) - escalon(n-5);
-
-
 
 stemCompleto(n,x,...
   'AxisLimits',[-5 5 -3 3],...

@@ -64,12 +64,13 @@ c_real = (4/T)*sinc(4.*ks/T)
 %     el tiempo de computo y lo extendí para que entren
 %     varios períodos de la SF
 %
+%{
 t = -30:0.05:30;
 SFx_aprox = zeros(size(t))
 for k = ks
   SFx_aprox = SFx_aprox + exp(1i*2*pi*k*t/T)*c_aprox(K+1+k)
 end
-
+%}
 % ------------------------- Fin d) -------------------------------
 
 
@@ -77,7 +78,7 @@ end
 % ------------------------- Inicio e) -------------------------------
 
 f = -20:1e-2:20;
-H = 1i*2*pi.*f/( (1i*2*pi.*f).^2 + 1i*2*pi.*f + 1 )
+H = 1i*2*pi*f./( (1i*2*pi.*f).^2 + 1i*2*pi*f + 1 )
 
 
 fk = ks/T
@@ -170,7 +171,7 @@ plotCompleto(t,real(SFy_aprox),...
 
 plotCompleto(f,abs(H),...
     'Hold',1,...
-    'AxisLimits',[min(f) max(f)  2 2],...
+    'AxisLimits',[-0.5 0.5  -2 2],...
     'Subplot',[2 1 2],...
     'XLabel','f',...
     'Title','SF de la salida del sistema',...

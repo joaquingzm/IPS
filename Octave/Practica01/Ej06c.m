@@ -1,10 +1,10 @@
 %% Ej 6 P1 - IPS
-
+% Limpiar
 clear all; clc; close all;
 
 addpath('Funciones');
 
-% Vectores a utilizar en todo el ejercicio
+%% Vectores a utilizar en todo el ejercicio
 
 % VIC
 dt = 1e-3

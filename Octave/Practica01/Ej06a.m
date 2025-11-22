@@ -1,9 +1,11 @@
 %% Ej 6 P1 - IPS
-% Limpiamos la ventana de comandos, borramos todas las variables, cerramos
-% todas las figuras.
+% Limpiar
 clear all;close all;clc;
+
 % Anadimos directorio con definiciones de funciones utiles
+
 addpath('Funciones')
+
 % Creamos un vector de tiempo util para todo el ejercicio.
 dt = 1e-3;
 t  = -20:dt:20;
