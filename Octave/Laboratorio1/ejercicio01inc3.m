@@ -1,7 +1,7 @@
 addpath('Funciones');
 
 %Indice
-n=[0:10];
+n=[-1:5];
 % Índice de frecuencia
 ds = 1e-3;
 s = -1:ds:1;
@@ -66,7 +66,7 @@ plotCompleto(s,angle(H_aprox),...
     'YLabel','∠H_1(e^{j2πs})',...
     'Title','Fase aprox TFTD ',...
     'FontSize',20,...
-    'LineStyle','r.-',...
+    'LineStyle','r.-',...t
     'LineWidth',3);
 
 % TFTD Analítica S1
