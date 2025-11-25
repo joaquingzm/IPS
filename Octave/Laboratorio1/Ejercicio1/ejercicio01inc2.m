@@ -1,6 +1,29 @@
-addpath('Funciones')
-%-----Sistema 1-----
+% ---------------------------------------------------------
+% Ejercicio 1 - Inciso 2
+% Descripción breve: Graficos de la respuesta impulsional y la respuesta en frecuencia de cada uno de los sistemas (de manera analítica).
+% ---------------------------------------------------------
+
+function ejercicio01inc2 ()
+
+% Carpeta donde está este archivo
+baseDir = fileparts(mfilename('fullpath'));
+
+% Funciones está DOS niveles arriba
+funcDir = fullfile(baseDir, '..', '..', 'Funciones');
+addpath(funcDir);
+
+
+%Indice n para los que graficaremos cada h[n]
 n=[-1:10];
+
+%Indice s para los que graficaremos cada H(e^(j2pis))
+
+S=0.5;
+ds=1e-3;
+s=[-S:ds:S];
+
+%-----Sistema 1-----
+
 h=0.5 .* deltaKronecker(n)+ 0.5 .* deltaKronecker(n-1);
 
 stemCompleto(n,h,...
@@ -17,7 +40,7 @@ stemCompleto(n,h,...
   'MarkerEdgeColor','r',...
   'LineWidth',3);
 
-s=[-0.6:1e-3:0.6];
+
 H=(0.5).*(1+exp(-1i*2*pi*s));
 
 plotCompleto(s,abs(H),...
@@ -26,7 +49,7 @@ plotCompleto(s,abs(H),...
     'AxisLimits',[min(s) max(s) min(H)*1.2 max(H)*1.2],...
     'XLabel','s',...
     'YLabel','|H_1(e^{j2πs})|',...
-    'Title','Modulo de Respuesta en frecuencia',...
+    'Title','Modulo de Respuesta en frecuencia (|s| <= 1/2)',...
     'FontSize',20,...
     'LineStyle','r.-',...
     'LineWidth',3);
@@ -37,12 +60,12 @@ plotCompleto(s,angle(H),...
     'AxisLimits',[min(s) max(s) min(angle(H))*1.2 max(angle(H))*1.2],...
     'XLabel','s',...
     'YLabel', '∠H_1(e^{j2πs})',...
-    'Title','Fase de Respuesta en frecuencia',...
+    'Title','Fase de Respuesta en frecuencia (|s| <= 1/2)',...
     'FontSize',20,...
     'LineStyle','r.-',...
     'LineWidth',3);
 %-----Sistema 2-----
-n=[-1:10];
+
 h=0.5 .* deltaKronecker(n) - 0.5 .* deltaKronecker(n-1);
 
 stemCompleto(n,h,...
@@ -59,7 +82,7 @@ stemCompleto(n,h,...
   'MarkerEdgeColor','r',...
   'LineWidth',3);
 
-s=[-0.6:1e-3:0.6];
+
 H=(0.5).*(1-exp(-1i*2*pi*s));
 
 plotCompleto(s,abs(H),...
@@ -85,7 +108,7 @@ plotCompleto(s,angle(H),...
     'LineWidth',3);
 
 %-----Sistema 3-----
-n=[-2:10];
+
 h=0.25*(0.5).^n.*(escalon(n) + 2*escalon(n-1));
 
 stemCompleto(n,h,...
@@ -104,8 +127,8 @@ stemCompleto(n,h,...
 
 %legend('h3[n]','location','northwest');
 
-s=[-0.6:1e-3:0.6];
-H=( (0.25).*(1 ./ (1-0.5*exp(-1i*2*pi*s)))).*(1+exp(-1i*2*pi*s))
+
+H=( (0.25).*(1 ./ (1-0.5*exp(-1i*2*pi*s)))).*(1+exp(-1i*2*pi*s));
 
 plotCompleto(s,abs(H),...
     'Hold',1,...
@@ -134,7 +157,7 @@ plotCompleto(s,angle(H),...
 %legend('∠H(e^{j2\pis})','location','northwest');
 
 %-----Sistema 4------
-n=[-2:10];
+
 h=0.25*(-0.5).^n.*(escalon(n) + 2*escalon(n-1));
 
 stemCompleto(n,h,...
@@ -153,8 +176,8 @@ stemCompleto(n,h,...
 
 %legend('h3[n]','location','northwest');
 
-s=[-0.6:1e-3:0.6];
-H=( (0.25).*(1 ./ (1+0.5*exp(-1i*2*pi*s)))).*(1-exp(-1i*2*pi*s))
+
+H=( (0.25).*(1 ./ (1+0.5*exp(-1i*2*pi*s)))).*(1-exp(-1i*2*pi*s));
 
 plotCompleto(s,abs(H),...
     'Hold',1,...
@@ -183,7 +206,4 @@ plotCompleto(s,angle(H),...
 %legend('∠H(e^{j2\pis})','location','northwest');
 
 
-
-
-
-
+end

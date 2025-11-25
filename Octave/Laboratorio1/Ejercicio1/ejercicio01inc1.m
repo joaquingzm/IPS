@@ -1,12 +1,27 @@
-addpath('Funciones');
-addpath('Laboratorio1/IPS2025_PU1');
+% ---------------------------------------------------------
+% Ejercicio 1 - Inciso 1
+% Descripción breve: Grafico de senial.m y  de la aproximación de su TFTD
+% ---------------------------------------------------------
+
+function ejercicio01inc1 ()
+
+% Carpeta donde está este archivo
+baseDir = fileparts(mfilename('fullpath'));
+
+% Funciones está DOS niveles arriba
+funcDir = fullfile(baseDir, '..', '..', 'Funciones');
+addpath(funcDir);
+% IPS2025_PU1 está UN nivel arriba
+labDir = fullfile(baseDir, '..', 'IPS2025_PU1');
+addpath(labDir);
 
 % Limpiar todo
 clear all; close all; clc;
 
+%Obtención de indices para los que esta definida senial.m junto con la salida para cada uno de esos n
 [n , x] = senial(37514);
 
-% Índice de frecuencia s
+% Índice de frecuencia s para la aproximacion de la TFTD
 S = 0.5;
 ds = 1e-3;
 s = -S:ds:S;
@@ -17,6 +32,7 @@ X_aprox = zeros(size(s));
 for k = 1:length(s)
   X_aprox(k) = sum(x.*exp(-1i*2*pi*s(k)*n));
 end;
+
 %{
 stemCompleto(n,real(x),...
   %'Hold',1,...
@@ -74,3 +90,4 @@ plotCompleto(s,unwrap(angle(X_aprox)),...
 
 legend('angle(X_a_p_r_o_x)','location','northwest');
 
+end
