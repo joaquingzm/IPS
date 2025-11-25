@@ -1,13 +1,28 @@
-addpath('Funciones');
+% ---------------------------------------------------------
+% Ejercicio 1 - Inciso 3
+% Descripción breve: Implementación de los sistemas y graficos comparativos:
+%-Respuesta impulsional obtenida analiticamente en comparacion con la salida de cada sistema al ingresar una deltaKronecker
+%-TFTD de la respuesta impulsional obtenida analiticamente en comparacion con la aproximacion de la TFTD para cada respuesta impulsional
+% ---------------------------------------------------------
 
-%Indice
-n=[-1:5];
-% Índice de frecuencia
-ds = 1e-3;
-s = -1:ds:1;
+function ejercicio01inc3()
+% Carpeta donde está este archivo
+baseDir = fileparts(mfilename('fullpath'));
+
+% Funciones está DOS niveles arriba
+funcDir = fullfile(baseDir, '..', '..', 'Funciones');
+addpath(funcDir);
+
+%Indice n para los que graficaremos cada h[n]
+n=[-1:10];
+
+%Indice s para los que graficaremos cada H(e^(j2pis))
+S=0.5;
+ds=1e-3;
+s=[-S:ds:S];
 
 %Respuesta impulsional de S1
-h= sistema1(deltaKronecker(n));
+h=sistema1(deltaKronecker(n));
 
 stemCompleto(n,h,...
   'AxisLimits',[min(n) max(n) min(h)*1.2 max(h)*1.2],...
@@ -95,7 +110,7 @@ plotCompleto(s,angle(H_ana),...
     'LineWidth',3);
 
 %Respuesta impulsional de S2
-h= sistema2(deltaKronecker(n));
+h=sistema2(deltaKronecker(n));
 
 stemCompleto(n,h,...
   'AxisLimits',[min(n) max(n) min(h)*1.2 max(h)*1.2],...
@@ -113,7 +128,7 @@ stemCompleto(n,h,...
 
 %Respuesta impulsional analitica de S2
 
-h= 0.5 * deltaKronecker(n) - 0.5 * deltaKronecker(n-1);
+h=0.5 * deltaKronecker(n) - 0.5 * deltaKronecker(n-1);
 
 stemCompleto(n,h,...
   'AxisLimits',[min(n) max(n) min(h)*1.2 max(h)*1.2],...
@@ -184,7 +199,7 @@ plotCompleto(s,angle(H_ana),...
 
 
 %Respuesta impulsional de S3
-h= sistema3(deltaKronecker(n));
+h=sistema3(deltaKronecker(n));
 
 stemCompleto(n,h,...
   'AxisLimits',[min(n) max(n) min(h)*1.2 max(h)*1.2],...
@@ -202,7 +217,7 @@ stemCompleto(n,h,...
 
 %Respuesta impulsional analitica de S3
 
-h= (0.25)*(0.5).^n .*(escalon(n) + 2*escalon(n-1));
+h=(0.25)*(0.5).^n .*(escalon(n) + 2*escalon(n-1));
 
 stemCompleto(n,h,...
   'AxisLimits',[min(n) max(n) min(h)*1.2 max(h)*1.2],...
@@ -363,5 +378,4 @@ plotCompleto(s,unwrap(angle(H_ana)),...
     'LineWidth',3);
 
 
-
-
+end
