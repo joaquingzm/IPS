@@ -1,12 +1,16 @@
 
 function ejercicio01inc5 ()
 if ~exist('salidasinc4.mat', 'file')
-    error('Primero ejecute el inciso 4. No se encontraron las salidas.');
+     fprintf("⚠️Primero ejecute el inciso 4. No se encontraron las salidas.\n");
+     disp("Presione una tecla para volver al menú del ejercicio 1...");
+     pause;
     return;
 end
 % Obtener la ruta del directorio del inciso 5
 baseDir = fileparts(mfilename('fullpath'));
-
+% Funciones está DOS niveles arriba
+funcDir = fullfile(baseDir, '..', '..', 'Funciones');
+addpath(funcDir);
 % Crear el path al archivo de salidas
 inputFile = fullfile(baseDir, 'salidasinc4.mat');
 
