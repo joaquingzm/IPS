@@ -14,8 +14,6 @@ inputFile = fullfile(baseDir, 'salidasinc4.mat');
 load(inputFile);
 
 
-load('salidasinc4.mat');
-
 
 %Indice s para los que graficaremos cada Y(e^(j2pis))
 
@@ -26,7 +24,7 @@ s=[-S:ds:S];
 %Aproximación de la TFTD de la salida del sistema 1 al ingresar senial.m
 Y_aprox = zeros(size(s));
 for i = 1:length(s)
-  Y_aprox(i) = sum(y1.*exp(-1i*2*pi*s(i)*n));
+  Y_aprox(i) = sum(y1.*exp(-1i*2*pi*s(i)*n1));
 end
 
 plotCompleto(s,abs(Y_aprox),...
@@ -54,7 +52,7 @@ plotCompleto(s,unwrap(angle(Y_aprox)),...
 %Aproximación de la TFTD de la salida del sistema 2 al ingresar senial.m
 Y_aprox = zeros(size(s));
 for i = 1:length(s)
-  Y_aprox(i) = sum(y2.*exp(-1i*2*pi*s(i)*n));
+  Y_aprox(i) = sum(y2.*exp(-1i*2*pi*s(i)*n2));
 end
 
 plotCompleto(s,abs(Y_aprox),...
@@ -82,7 +80,7 @@ plotCompleto(s,unwrap(angle(Y_aprox)),...
 %Aproximación de la TFTD de la salida del sistema 3 al ingresar senial.m
 Y_aprox = zeros(size(s));
 for i = 1:length(s)
-  Y_aprox(i) = sum(y3.*exp(-1i*2*pi*s(i)*n));
+  Y_aprox(i) = sum(y3.*exp(-1i*2*pi*s(i)*n3));
 end
 
 plotCompleto(s,abs(Y_aprox),...
@@ -110,7 +108,7 @@ plotCompleto(s,unwrap(angle(Y_aprox)),...
 %Aproximación de la TFTD de la salida del sistema 4 al ingresar senial.m
 Y_aprox = zeros(size(s));
 for i = 1:length(s)
-  Y_aprox(i) = sum(y4.*exp(-1i*2*pi*s(i)*n));
+  Y_aprox(i) = sum(y4.*exp(-1i*2*pi*s(i)*n4));
 end
 
 plotCompleto(s,abs(Y_aprox),...
