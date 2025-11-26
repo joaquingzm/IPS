@@ -3,7 +3,7 @@ function ejercicio01inc5 ()
 if ~exist('salidasinc4.mat', 'file')
     error('Primero ejecute el inciso 4. No se encontraron las salidas.');
     return;
-
+end
 % Obtener la ruta del directorio del inciso 5
 baseDir = fileparts(mfilename('fullpath'));
 

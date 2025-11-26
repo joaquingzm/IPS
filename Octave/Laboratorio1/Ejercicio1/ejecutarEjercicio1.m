@@ -16,11 +16,21 @@ function ejecutarEjercicio1()
         opcion = input("\nSeleccione un inciso: ");
 
         switch opcion
-            case 1, ejercicio01inc1();
-            case 2, ejercicio01inc2();
-            case 3, ejercicio01inc3();
-            case 4, ejercicio01inc4();
-            case 5, ejercicio01inc5();
+            case 1
+              ejercicio01inc1();
+              clc;
+            case 2
+              ejercicio01inc2();
+              clc;
+            case 3
+              ejercicio01inc3();
+              clc;
+            case 4
+              ejercicio01inc4();
+              clc;
+            case 5
+              ejercicio01inc5();
+              clc;
             case 0, return;
             otherwise
                 fprintf("Opción inválida.\n\n");

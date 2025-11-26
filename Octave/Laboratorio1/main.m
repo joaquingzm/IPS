@@ -3,12 +3,12 @@ clc; clear; close all;
 
 % Carpeta donde está este archivo
 baseDir = fileparts(mfilename('fullpath'));
-disp(baseDir)
 % Agrego las carpetas de los ejercicios 1 y 2
 funcDir = fullfile(baseDir, 'Ejercicio1');
 addpath(funcDir);
 funcDir = fullfile(baseDir, 'Ejercicio2');
 addpath(funcDir);
+
 fprintf("====================================================================\n");
 fprintf("     Practica con utilitario 1 – Joaquín Guzmán y Tomás Gamarra      \n");
 fprintf("====================================================================\n\n");
@@ -25,7 +25,7 @@ while true
     switch opcion
         case 1
             ejecutarEjercicio1();
-             clc;
+            clc;
         case 2
             ejecutarEjercicio2();
             clc;
