@@ -6,7 +6,9 @@ baseDir = fileparts(mfilename('fullpath'));
 % Funciones está DOS niveles arriba
 funcDir = fullfile(baseDir, '..', '..', 'Funciones');
 addpath(funcDir);
-
+%IPS2025_PU1 está UN nivel arriba
+labDir = fullfile(baseDir, '..', 'IPS2025_PU1');
+addpath(labDir);
 
 [n, h] = hcanald(037514);
 %Salida del sistema implementado en como ecuacion en diferencias al aplicarle una delta de kronecker (Respuesta impulsional)

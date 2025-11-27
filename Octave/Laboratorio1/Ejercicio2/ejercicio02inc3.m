@@ -9,9 +9,9 @@ addpath(funcDir);
 %IPS2025_PU1 está UN nivel arriba
 labDir = fullfile(baseDir, '..', 'IPS2025_PU1');
 addpath(labDir);
+audioDir = fullfile(labDir,'audio.wav');
 
-
-[z , fs] = audioread('IPS2025_PU1/audio.wav'); %Devuelve en z una matriz de 2 columnas dado que el audio es estereo
+[z , fs] = audioread(audioDir); %Devuelve en z una matriz de 2 columnas dado que el audio es estereo
 x1 = (z(:,1)).'; %Toma la primera columna (z(:,1) es un vector columna) → canal izquierdo. Luego .' lo transpone → lo convierte en vector fila.
 x2 = (z(:,2)).'; %Mismo con canal derecho
 x = (x1+x2)/2; %Promedio obteniendo audio mono
