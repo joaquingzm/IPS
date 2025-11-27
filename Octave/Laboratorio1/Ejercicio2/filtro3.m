@@ -9,12 +9,12 @@ function [ny,y] = filtro3(nx,x)
   b3=-0.0256;
   n_max = max([n1 n2 n3]);
 
-
+  %Calculo del soporte final
   Lx = length(x);
   L_final = Lx + n_max;
 
   % x[n]
-  x0 = [x zeros(1, n_max)];
+  x_aux = [x zeros(1, n_max)];
 
   % x[n - n1]
   x1 = [zeros(1,n1) x zeros(1, L_final - (n1 + Lx))];
@@ -26,8 +26,8 @@ function [ny,y] = filtro3(nx,x)
   x3 = [zeros(1,n3) x zeros(1, L_final - (n3 + Lx))];
 
   % Salida
-  y = x0 + b1*x1 +b2*x2 + b3*x3;
+  y = x_aux + b1*x1 +b2*x2 + b3*x3;
 
-  % Busco soporte hasta max(nx) + n3
+  % Nuevos indices para el cual estara definida la señal de salida y[n]
   ny = (nx(1) : (nx(end) + n_max));
 end

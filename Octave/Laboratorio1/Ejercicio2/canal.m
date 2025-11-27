@@ -6,7 +6,7 @@ function [ny,y] = canal(nx,x)
   n_max = max([n1 n2]);
 
 
-
+ %Calculo del soporte final
   Lx = length(x);
   L_final = Lx + n_max;
 
