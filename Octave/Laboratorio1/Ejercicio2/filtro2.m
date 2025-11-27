@@ -1,6 +1,5 @@
 function [ny,y] = filtro2(nx,x)
-
-  %Valores obtenidos de plantear la respuesta total y buscar una unica delta de kronecker
+  %Valores obtenidos de plantear la respuesta total Canal + Filtro y buscar que la salida sea una unica delta de kronecker
   n1=8820;
   n2=3*8820;
   b1=-0.4;
@@ -23,6 +22,6 @@ function [ny,y] = filtro2(nx,x)
   % Salida
   y = x0 + b1*x1 +b2*x2;
 
-  % Busco soporte hasta max(nx) + n1
+  % Busco soporte hasta max(nx) + n2
   ny = (nx(1) : (nx(end) + n_max));
 end

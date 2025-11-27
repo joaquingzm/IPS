@@ -1,3 +1,6 @@
+function ejercicio02inc3 ()
+
+clear all; close all; clc;
 % Carpeta donde está este archivo
 baseDir = fileparts(mfilename('fullpath'));
 % Funciones está DOS niveles arriba
@@ -7,11 +10,10 @@ addpath(funcDir);
 labDir = fullfile(baseDir, '..', 'IPS2025_PU1');
 addpath(labDir);
 
-clear all; close all; clc;
 
 [z , fs] = audioread('IPS2025_PU1/audio.wav'); %Devuelve en z una matriz de 2 columnas dado que el audio es estereo
 x1 = (z(:,1)).'; %Toma la primera columna (z(:,1) es un vector columna) → canal izquierdo. Luego .' lo transpone → lo convierte en vector fila.
-x2 = (z(:,2)).';
+x2 = (z(:,2)).'; %Mismo con canal derecho
 x = (x1+x2)/2; %Promedio obteniendo audio mono
 
 n = 1:length(x);
@@ -23,7 +25,7 @@ plotCompleto(n,x1,...
     'XLabel','',...
     'Title','Canal izquierdo',...
     'FontSize',20,...
-    'LineStyle','r.-',...
+    'LineStyle','b.-',...
     'LineWidth',3);
 
 
@@ -62,4 +64,4 @@ plotCompleto(ny,y,...
     'FontSize',20,...
     'LineStyle','b.-',...
     'LineWidth',3);
-
+end

@@ -1,6 +1,5 @@
 function [ny,y] = filtro1(nx,x)
-
-  %Valores obtenidos de plantear la respuesta total y buscar una unica delta de kronecker
+  %Valores obtenidos de plantear la respuesta total Canal + Filtro y buscar que la salida sea una unica delta de kronecker
   n1 = 8820;
   beta=-0.4;
 

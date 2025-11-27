@@ -1,3 +1,5 @@
+function ejercicio02inc1 ()
+clear all; close all; clc;
 % Carpeta donde está este archivo
 baseDir = fileparts(mfilename('fullpath'));
 % Funciones está DOS niveles arriba
@@ -7,7 +9,7 @@ addpath(funcDir);
 labDir = fullfile(baseDir, '..', 'IPS2025_PU1');
 addpath(labDir);
 
-clear all; close all; clc;
+
 
 [n, h] = hcanald(037514);
 
@@ -38,5 +40,5 @@ end
 Los valores de n fueron : 0 8820 17640
 Los valores de h para esos n fueron: 1 0.4 0.16
 %}
-
+end
 

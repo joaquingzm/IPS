@@ -28,6 +28,6 @@ function [ny,y] = filtro3(nx,x)
   % Salida
   y = x0 + b1*x1 +b2*x2 + b3*x3;
 
-  % Busco soporte hasta max(nx) + n1
+  % Busco soporte hasta max(nx) + n3
   ny = (nx(1) : (nx(end) + n_max));
 end

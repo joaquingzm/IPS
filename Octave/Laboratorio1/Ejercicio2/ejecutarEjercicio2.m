@@ -10,7 +10,7 @@ function ejecutarEjercicio2()
         fprintf("  2) Inciso 2 - Gráfico de respuesta al impulso obtenida al ingresar una delta de kronecker a la ecuación en diferencias que se dedujo en el inciso 1 \n");
         fprintf("  3) Inciso 3 - Gráfico de la señal de entrada (audio.wav) y de la salida del canal al aplicarle esta\n");
         fprintf("  4) Inciso 4 - Gráficos de la respuesta impulsional Canal + Filtro. Para filtros con 1, 2 y 3 ramas de retardo. \n");
-        fprintf("  5) Inciso 5 - Aplicación de filtros a la salida de hcanald.m y comparacion de como se escuchan las salidas.\n");
+        fprintf("  5) Inciso 5 - Aplicación de filtros a la salida de hcanald.m y comparacion de como se escuchan las salidas. Se escucharan los siguiente sonidos:\n   -Audio original\n   -Audio al pasar por Canal + Filtro1\n   -Audio al pasar por Canal + Filtro2\n   -Audio al pasar por Canal + Filtro3\n");
         fprintf("  0) Volver al menú principal\n");
 
         opcion = input("\nSeleccione un inciso: ");

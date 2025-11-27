@@ -1,4 +1,4 @@
-function [ny,y] = sistema(nx,x)
+function [ny,y] = canal(nx,x)
 
   % Retardos del canal
   n1 = 8820;

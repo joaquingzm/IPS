@@ -1,3 +1,6 @@
+function ejercicio02inc2 ()
+
+clear all; close all; clc;
 % Carpeta donde está este archivo
 baseDir = fileparts(mfilename('fullpath'));
 % Funciones está DOS niveles arriba
@@ -5,7 +8,6 @@ funcDir = fullfile(baseDir, '..', '..', 'Funciones');
 addpath(funcDir);
 
 
-clear all; close all; clc;
 [n, h] = hcanald(037514);
 %Salida del sistema implementado en como ecuacion en diferencias al aplicarle una delta de kronecker (Respuesta impulsional)
 [ny,h] = canal(n,deltaKronecker(n));
@@ -23,4 +25,4 @@ stemCompleto(ny,h,...
   'MarkerFaceColor','r',...
   'MarkerEdgeColor','r',...
   'LineWidth',3);
-
+end
